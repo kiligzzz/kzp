@@ -1,15 +1,5 @@
 # kzp(SpringCloud)
 
-### 版本对应
-
-[版本说明 · alibaba/spring-cloud-alibaba Wiki (github.com)](https://github.com/alibaba/spring-cloud-alibaba/wiki/版本说明)
-
-| Spring Boot Version | Spring Cloud Alibaba Version | Sentinel Version | Nacos Version | RocketMQ Version | Dubbo Version | Seata Version |
-| ------------------- | ---------------------------- | ---------------- | ------------- | ---------------- | ------------- | ------------- |
-| 2.6.11              | 2021.0.4.0                   | 1.8.5            | 2.0.4         | 4.9.4            | ~             | 1.5.2         |
-
-
-
 ## 架构
 
 ### 项目结构
