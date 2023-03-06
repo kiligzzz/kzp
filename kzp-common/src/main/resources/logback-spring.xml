@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- 日志文件名，获取应用名作为日志文件名 -->
+    <springProperty name="log.name" source="spring.application.name"/>
+    <!-- 日志级别 -->
+    <property name="log.level" value="info"/>
+    <!-- SpringBoot日志级别 -->
+    <property name="spring.log.level" value="info"/>
+    <!-- 日志存放路径 -->
+    <property name="log.path" value="./logs"/>
+    <!-- 日志保存天数 -->
+    <property name="log.save" value="30"/>
+    <!-- 日志文件大小 -->
+    <property name="log.size" value="20MB"/>
+    <!-- 日志输出格式 -->
+    <property name="log.pattern.console"
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%-5level) - %boldMagenta([%thread]) %yellow(%logger) %blue([%method,%line]) - %msg%n"/>
+    <property name="log.pattern.file"
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level - [%thread] %logger [%method,%line] - %msg%n"/>
+
+    <!-- 控制台输出 -->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${log.pattern.console}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 防止加载两次，需引入janino依赖 -->
+    <if condition='isDefined("log.name")'>
+        <then>
+            <!-- 系统日志输出 -->
+            <appender name="info_file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+                <file>${log.path}/${log.name}-info.log</file>
+                <encoder>
+                    <pattern>${log.pattern.file}</pattern>
+                </encoder>
+                <!-- 滚动策略：基于时间创建日志文件 -->
+                <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+                    <!-- 日志文件名格式 -->
+                    <fileNamePattern>${log.path}/${log.name}_info_%d{yyyy-MM-dd}_%i.log</fileNamePattern>
+                    <maxFileSize>${log.size}</maxFileSize>
+                    <!-- 日志文件保留天数：30天 -->
+                    <maxHistory>${log.save}</maxHistory>
+                </rollingPolicy>
+                <filter class="ch.qos.logback.classic.filter.LevelFilter">
+                    <level>ERROR</level>
+                    <onMatch>ACCEPT</onMatch>
+                    <onMismatch>NEUTRAL</onMismatch>
+                </filter>
+                <filter class="ch.qos.logback.classic.filter.LevelFilter">
+                    <level>WARN</level>
+                    <onMatch>ACCEPT</onMatch>
+                    <onMismatch>NEUTRAL</onMismatch>
+                </filter>
+                <filter class="ch.qos.logback.classic.filter.LevelFilter">
+                    <level>INFO</level>
+                    <onMatch>ACCEPT</onMatch>
+                    <onMismatch>DENY</onMismatch>
+                </filter>
+            </appender>
+
+            <appender name="warn_file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+                <file>${log.path}/${log.name}-warn.log</file>
+                <encoder>
+                    <pattern>${log.pattern.file}</pattern>
+                </encoder>
+                <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+                    <fileNamePattern>${log.path}/${log.name}_warn_%d{yyyy-MM-dd}_%i.log</fileNamePattern>
+                    <maxFileSize>${log.size}</maxFileSize>
+                    <maxHistory>${log.save}</maxHistory>
+                </rollingPolicy>
+                <filter class="ch.qos.logback.classic.filter.LevelFilter">
+                    <level>ERROR</level>
+                    <onMatch>ACCEPT</onMatch>
+                    <onMismatch>NEUTRAL</onMismatch>
+                </filter>
+                <filter class="ch.qos.logback.classic.filter.LevelFilter">
+                    <level>WARN</level>
+                    <onMatch>ACCEPT</onMatch>
+                    <onMismatch>DENY</onMismatch>
+                </filter>
+            </appender>
+
+            <appender name="error_file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+                <file>${log.path}/${log.name}-error.log</file>
+                <encoder>
+                    <pattern>${log.pattern.file}</pattern>
+                </encoder>
+                <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+                    <fileNamePattern>${log.path}/${log.name}_error_%d{yyyy-MM-dd}_%i.log</fileNamePattern>
+                    <maxFileSize>${log.size}</maxFileSize>
+                    <maxHistory>${log.save}</maxHistory>
+                </rollingPolicy>
+                <filter class="ch.qos.logback.classic.filter.LevelFilter">
+                    <level>ERROR</level>
+                    <onMatch>ACCEPT</onMatch>
+                    <onMismatch>DENY</onMismatch>
+                </filter>
+            </appender>
+        </then>
+    </if>
+
+    <root level="${log.level}">
+        <appender-ref ref="console"/>
+        <if condition='isDefined("log.name")'>
+            <then>
+                <appender-ref ref="info_file"/>
+                <appender-ref ref="warn_file"/>
+                <appender-ref ref="error_file"/>
+            </then>
+        </if>
+    </root>
+
+    <!--Spring日志级别控制  -->
+    <logger name="org.springframework" level="${spring.log.level}" />
+</configuration>

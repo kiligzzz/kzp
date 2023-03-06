@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kiligz.kzp.user.mapper.RoleMapper">
+    <select id="selectOneByUserId" resultType="com.kiligz.kzp.entity.user.Role">
+        SELECT role.id, role.role, role.permission
+        FROM user.user, user.role
+        <where>
+            user.role_id = role.id
+            <if test="id != null">
+                AND user.id = #{id,jdbcType=NUMERIC};
+            </if>
+        </where>
+    </select>
+</mapper>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <packaging>pom</packaging>
+
+    <artifactId>kzp-plugin</artifactId>
+
+    <parent>
+        <groupId>com.kiligz</groupId>
+        <artifactId>kzp</artifactId>
+        <version>0.0.1</version>
+    </parent>
+
+    <modules>
+        <module>kzp-nacos</module>
+        <module>kzp-rpc</module>
+        <module>kzp-satoken</module>
+        <module>kzp-seata</module>
+        <module>kzp-sentinel</module>
+    </modules>
+
+    <dependencies>
+        <!-- kzp-common，编译、测试使用-->
+        <dependency>
+            <groupId>com.kiligz</groupId>
+            <artifactId>kzp-common</artifactId>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- 带上依赖的jar打成一体包 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>${maven-assembly-plugin.version}</version>
+                <configuration>
+                    <skipAssembly>true</skipAssembly>
+                </configuration>
+                <inherited>false</inherited>
+                <executions>
+                    <execution>
+                        <id>kzp</id>
+                        <configuration>
+                            <skipAssembly>true</skipAssembly>
+                        </configuration>
+                        <inherited>true</inherited>
+                    </execution>
+                    <execution>
+                        <id>kzp-plugin</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <descriptorRefs>
+                                <descriptorRef>jar-with-dependencies</descriptorRef>
+                            </descriptorRefs>
+                            <appendAssemblyId>false</appendAssemblyId>
+                        </configuration>
+                        <inherited>true</inherited>
+                    </execution>
+                </executions>
+            </plugin>
+            <!--<plugin>-->
+            <!--    <groupId>org.apache.maven.plugins</groupId>-->
+            <!--    <artifactId>maven-shade-plugin</artifactId>-->
+            <!--    <executions>-->
+            <!--        <execution>-->
+            <!--            <phase>package</phase>-->
+            <!--            <goals>-->
+            <!--                <goal>shade</goal>-->
+            <!--            </goals>-->
+            <!--            <configuration>-->
+            <!--                <createSourcesJar>false</createSourcesJar>-->
+            <!--                <createDependencyReducedPom>false</createDependencyReducedPom>-->
+            <!--            </configuration>-->
+            <!--        </execution>-->
+            <!--    </executions>-->
+            <!--</plugin>-->
+        </plugins>
+    </build>
+</project>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>kzp-admin</artifactId>
+
+    <parent>
+        <artifactId>kzp</artifactId>
+        <groupId>com.kiligz</groupId>
+        <version>0.0.1</version>
+    </parent>
+
+    <dependencies>
+        <!-- kzp-common -->
+        <dependency>
+            <groupId>com.kiligz</groupId>
+            <artifactId>kzp-common</artifactId>
+        </dependency>
+
+        <!-- kzp-nacos -->
+        <dependency>
+            <groupId>com.kiligz</groupId>
+            <artifactId>kzp-nacos</artifactId>
+        </dependency>
+
+        <!-- kzp-satoken -->
+        <dependency>
+            <groupId>com.kiligz</groupId>
+            <artifactId>kzp-satoken</artifactId>
+        </dependency>
+    </dependencies>
+</project>

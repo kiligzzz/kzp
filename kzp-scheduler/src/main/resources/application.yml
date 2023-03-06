@@ -1,0 +1,9 @@
+server:
+  port: 17004
+spring:
+  application:
+    name: kzp-scheduler
+xxl-job:
+  admin:
+    address: http://${host}:8082/xxl-job-admin
+  accessToken: default_token

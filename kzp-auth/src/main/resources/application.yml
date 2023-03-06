@@ -1,0 +1,5 @@
+server:
+  port: 17005
+spring:
+  application:
+    name: kzp-auth

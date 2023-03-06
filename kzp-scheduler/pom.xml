@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>kzp-scheduler</artifactId>
+
+    <parent>
+        <artifactId>kzp</artifactId>
+        <groupId>com.kiligz</groupId>
+        <version>0.0.1</version>
+    </parent>
+
+    <dependencies>
+        <!-- kzp-common -->
+        <dependency>
+            <groupId>com.kiligz</groupId>
+            <artifactId>kzp-common</artifactId>
+        </dependency>
+
+        <!-- kzp-nacos -->
+        <dependency>
+            <groupId>com.kiligz</groupId>
+            <artifactId>kzp-nacos</artifactId>
+        </dependency>
+
+        <!-- canal -->
+        <dependency>
+            <groupId>com.alibaba.otter</groupId>
+            <artifactId>canal.client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.otter</groupId>
+            <artifactId>canal.protocol</artifactId>
+        </dependency>
+
+        <!-- xxl-job -->
+        <dependency>
+            <groupId>com.xuxueli</groupId>
+            <artifactId>xxl-job-core</artifactId>
+        </dependency>
+    </dependencies>
+</project>

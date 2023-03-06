@@ -1,0 +1,38 @@
+server:
+  port: 7091
+spring:
+  application:
+    name: seata-server
+logging:
+  config: classpath:logback-spring.xml
+  file:
+    path: ./logs/seata
+console:
+  user:
+    username: seata
+    password: seata
+seata:
+  config:
+    type: nacos
+    nacos:
+      server-addr: ${host}:8848
+      group: SEATA_GROUP
+      namespace: seata
+      username: nacos
+      password: nacos
+      data-id: seataServer.properties
+  registry:
+    type: nacos
+    nacos:
+      application: seata-server
+      server-addr: ${host}:8848
+      group: SEATA_GROUP
+      namespace: seata
+      cluster: default
+      username: nacos
+      password: nacos
+  security:
+    secretKey: SeataSecretKey0c382ef121d778043159209298fd40bf3850a017
+    tokenValidityInMilliseconds: 1800000
+    ignore:
+      urls: /,/**/*.css,/**/*.js,/**/*.html,/**/*.map,/**/*.svg,/**/*.png,/**/*.ico,/console-fe/public/**,/api/v1/auth/login

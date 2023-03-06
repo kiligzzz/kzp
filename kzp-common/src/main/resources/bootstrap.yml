@@ -1,0 +1,53 @@
+host: 192.168.32.32
+password: qepwq
+spring:
+  cloud:
+    nacos:
+      server-addr: ${host}:8848
+      discovery:
+        group: KZP_GROUP
+      config:
+        group: KZP_GROUP
+        file-extension: yml
+    sentinel:
+      transport:
+        dashboard: ${host}:8858
+  redis:
+    database: 0
+    host: ${host}
+    timeout: PT10S
+    password: ${password}
+dubbo:
+  application:
+    metadataType: remote
+    register-mode: instance
+  scan:
+    base-packages: com.kiligz.kzp
+  consumer:
+    check: false
+  protocol:
+    name: dubbo
+    port: -1
+  registry:
+    address: nacos://${spring.cloud.nacos.server-addr}
+    group: DUBBO_GROUP
+    parameters:
+      namespace: dubbo
+seata:
+  config:
+    type: nacos
+    nacos:
+      server-addr: ${spring.cloud.nacos.server-addr}
+      namespace: seata
+      data-id: seataServer.properties
+  registry:
+    type: nacos
+    nacos:
+      application: seata-server
+      server-addr: ${spring.cloud.nacos.server-addr}
+      namespace: seata
+  tx-service-group: KZP_GROUP
+rocketmq:
+  consumer:
+    group: test
+  name-server: ${host}:9876

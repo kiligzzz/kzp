@@ -1,0 +1,126 @@
+version: '3.8'
+services:
+  # mysql
+  mysql:
+    image: library/mysql:5.7
+    container_name: mysql
+    privileged: true
+    restart: always
+    ports:
+      - 3306:3306
+    volumes: 
+      # 初始化sql位置，nacos.sql，seata.sql，xxl-job.sql
+      - ./mysql/init:/docker-entrypoint-initdb.d
+      - ./mysql/conf/my.cnf:/etc/mysql/my.cnf
+    environment:
+      - MYSQL_ROOT_PASSWORD=${password}
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+      interval: 3s
+      timeout: 3s
+      retries: 7
+      start_period: 3s
+  # nacos
+  nacos-server:
+    image: nacos/nacos-server:v2.0.4
+    container_name: nacos-server
+    privileged: true
+    restart: always
+    ports:
+      - 8848:8848
+      - 9848:9848
+      - 9849:9849
+    environment:
+      - JVM_XMS=512m
+      - JVM_XMX=512m
+      - JVM_XMN=256m
+      - MODE=standalone
+      - SPRING_DATASOURCE_PLATFORM=mysql
+      - MYSQL_SERVICE_HOST=${host}
+      - MYSQL_SERVICE_DB_NAME=nacos
+      - MYSQL_SERVICE_USER=root
+      - MYSQL_SERVICE_PASSWORD=qepwq
+    # 依赖mysql
+    depends_on:
+      mysql:
+        condition: service_healthy
+  # xxl-job-admin
+  xxl-job-admin:
+    image: xuxueli/xxl-job-admin:2.3.1
+    container_name: xxl-job-admin
+    ports:
+      - 8082:8080
+    environment:
+      - PARAMS=--spring.datasource.url=jdbc:mysql://${host}:3306/xxl_job?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=Asia/Shanghai --spring.datasource.password=${password}
+    # 依赖mysql
+    depends_on:
+      mysql:
+        condition: service_healthy
+  # canal
+  canal-server:
+    image: canal/canal-server:v1.1.6
+    container_name: canal-server
+    ports:
+      - 9100:9100
+      - 11110:11110
+      - 11111:11111
+      - 11112:11112
+    environment:
+      - canal.destinations=kzp
+      - canal.instance.master.address=${host}:3306
+      - canal.instance.dbUsername=root
+      - canal.instance.dbPassword=${password}
+      - canal.instance.connectionCharset=UTF-8
+      - canal.instance.tsdb.enable=true
+      - canal.instance.gtidon=false
+      - canal.instance.filter.regex=.*\\..*
+      - canal.instance.filter.query.dml=true
+    # 依赖mysql
+    depends_on:
+      mysql:
+        condition: service_healthy
+  # sentinel
+  sentinel-dashboard: 
+    image: bladex/sentinel-dashboard:latest
+    container_name: sentinel-dashboard
+    privileged: true
+    restart: always
+    ports:
+      - 8858:8858
+  # rocketmq
+  rocketmq:
+    image: xuchengen/rocketmq:4.9.4
+    container_name: rocketmq
+    privileged: true
+    restart: always
+    ports:
+      - 8081:8080
+      - 9876:9876
+      - 10909:10909
+      - 10911:10911
+      - 10912:10912
+    environment:
+      - NAMESRV_XMS=256m
+      - NAMESRV_XMX=256m
+      - NAMESRV_XMN=128m
+      - BROKER_XMS=512m
+      - BROKER_XMX=512m
+      - BROKER_XMN=256m
+      - BROKER_MDM=256m
+      - NAMESRV_ADDR=${host}:9876
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - /var/run/docker.sock:/var/run/docker.sock
+  # redis
+  redis:
+      image: library/redis:7.0
+      container_name: redis
+      privileged: true
+      restart: always
+      ports:
+        - 6379:6379
+      environment:
+        - TZ=Asia/Shanghai
+      volumes:
+        - ./redis/redis.conf:/etc/redis/redis.conf
+      command: ["redis-server","/etc/redis/redis.conf"]

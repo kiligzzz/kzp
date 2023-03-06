@@ -1,0 +1,11 @@
+server:
+  port: 17006
+spring:
+  application:
+    name: kzp-user
+  datasource:
+    username: root
+    password: ${password}
+    url: jdbc:mysql://${host}:3306/user
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource

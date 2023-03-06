@@ -1,0 +1,35 @@
+server:
+  port: 17000
+spring:
+  application:
+    name: kzp-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: kzp-auth
+          uri: lb://kzp-auth
+          predicates:
+            - Path=/kzp/auth/**
+          filters:
+            - StripPrefix=1
+        - id: kzp-biz
+          uri: lb://kzp-biz
+          predicates:
+            - Path=/kzp/biz/**
+          filters:
+            - StripPrefix=1
+        - id: kzp-user
+          uri: lb://kzp-user
+          predicates:
+            - Path=/kzp/user/**
+          filters:
+            - StripPrefix=1
+        - id: kzp-processor
+          uri: lb://kzp-processor
+          predicates:
+            - Path=/kzp/processor/**
+          filters:
+            - StripPrefix=1

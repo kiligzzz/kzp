@@ -1,0 +1,7 @@
+[
+  {
+    "uri": "/kzp/user/*",
+    "type": "role",
+    "accessible": "super-admin"
+  }
+]

@@ -1,0 +1,5 @@
+server:
+  port: 17001
+spring:
+  application:
+    name: kzp-biz

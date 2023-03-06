@@ -1,0 +1,13 @@
+{
+  "pattern": "DIRECT",
+  "msgWrapper": {
+    "channel": "email",
+    "to": "sss",
+    "msgList": [
+      {
+        "subject": "",
+        "content": ""
+      }
+    ]
+  }
+}

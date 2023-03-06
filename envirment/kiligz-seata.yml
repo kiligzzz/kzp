@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  # seata
+  seata-server:
+    image: seataio/seata-server:1.5.2
+    container_name: seata-server
+    ports:
+      - 7091:7091
+      - 8091:8091
+    environment:
+      - TZ=Asia/Shanghai
+      - SEATA_IP=${host}
+      - SEATA_PORT=8091
+    volumes:
+      # seata配置
+      - ./seata/application.yml:/seata-server/resources/application.yml

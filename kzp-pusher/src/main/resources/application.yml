@@ -1,0 +1,5 @@
+server:
+  port: 17003
+spring:
+  application:
+    name: kzp-pusher

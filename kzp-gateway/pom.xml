@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>kzp-gateway</artifactId>
+
+    <parent>
+        <artifactId>kzp</artifactId>
+        <groupId>com.kiligz</groupId>
+        <version>0.0.1</version>
+    </parent>
+
+    <dependencies>
+        <!-- kzp-common -->
+        <dependency>
+            <groupId>com.kiligz</groupId>
+            <artifactId>kzp-common</artifactId>
+        </dependency>
+
+        <!-- kzp-nacos -->
+        <dependency>
+            <groupId>com.kiligz</groupId>
+            <artifactId>kzp-nacos</artifactId>
+        </dependency>
+
+        <!-- kzp-rpc -->
+        <dependency>
+            <groupId>com.kiligz</groupId>
+            <artifactId>kzp-rpc</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+
+        <!-- gateway -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-gateway</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-loadbalancer</artifactId>
+        </dependency>
+        <!-- 排除spring-boot-web -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- sa-token-reactor -->
+        <dependency>
+            <groupId>cn.dev33</groupId>
+            <artifactId>sa-token-reactor-spring-boot-starter</artifactId>
+        </dependency>
+
+        <!-- sa-token-redis -->
+        <dependency>
+            <groupId>cn.dev33</groupId>
+            <artifactId>sa-token-dao-redis-jackson</artifactId>
+        </dependency>
+    </dependencies>
+</project>
