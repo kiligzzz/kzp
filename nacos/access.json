@@ -5,3 +5,8 @@
     "accessible": "super-admin"
   }
 ]
+<kzp#>
+access角色、权限配置
+- type：role（角色）| permission（权限码）两种
+- accessible：依据type的选择，填写对应的角色或权限，角色可用或（|）校验，权限可用且（,）和或（|）校验
+<#kzp>

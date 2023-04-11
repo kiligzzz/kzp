@@ -3,10 +3,6 @@ package com.kiligz.kzp.common.exception;
 import com.kiligz.kzp.common.domain.Status;
 import lombok.Getter;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 /**
  * Kzp异常
  *
@@ -18,21 +14,34 @@ public class KzpException extends RuntimeException {
     /**
      * 状态
      */
-    private final Status status;
+    private Status status;
 
     /**
-     * 错误信息列表
+     * 错误信息
      */
-    private final List<String> errorMsgList = new ArrayList<>();
+    private String msg;
 
-    public KzpException(Status status, String... errorMsgArr) {
-        this.status = status;
-        Collections.addAll(errorMsgList, errorMsgArr);
+    public KzpException(Status status) {
+        this(status, null);
     }
 
-    public KzpException(Exception e, Status status, String... errorMsgArr) {
+    public KzpException(Status status, String msg) {
+        this.status = status;
+        this.msg = msg;
+    }
+
+    public KzpException(Exception e, Status status) {
+        this(e, status, null);
+    }
+
+    public KzpException(Exception e, Status status, String msg) {
         super(e.getMessage());
         this.status = status;
-        Collections.addAll(errorMsgList, errorMsgArr);
+        this.msg = msg;
+    }
+
+    @Override
+    public String toString() {
+        return "KzpException: " + "status["+ status + "] msg[" + msg + "]";
     }
 }

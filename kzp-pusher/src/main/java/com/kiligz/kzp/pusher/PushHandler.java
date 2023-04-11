@@ -1,6 +1,5 @@
 package com.kiligz.kzp.pusher;
 
-import com.kiligz.kzp.common.utils.ConcurrentManager;
 import com.kiligz.kzp.pusher.task.PushTask;
 import org.springframework.stereotype.Service;
 

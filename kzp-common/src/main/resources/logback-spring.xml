@@ -14,9 +14,9 @@
     <property name="log.size" value="20MB"/>
     <!-- 日志输出格式 -->
     <property name="log.pattern.console"
-              value="%d{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%-5level) - %boldMagenta([%thread]) %yellow(%logger) %blue([%method,%line]) - %msg%n"/>
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%-5level) - %boldMagenta([%mdc{traceId}] [%mdc{spanId}] [${log.name}]) %boldMagenta([%thread]) %yellow(%logger{0}%blue(#%method,%line)) - %msg%n"/>
     <property name="log.pattern.file"
-              value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level - [%thread] %logger [%method,%line] - %msg%n"/>
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%-5level) - %boldMagenta([%mdc{traceId}] [%mdc{spanId}] [${log.name}]) %boldMagenta([%thread]) %yellow(%logger{0}%blue(#%method,%line)) - %msg%n"/>
 
     <!-- 控制台输出 -->
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">

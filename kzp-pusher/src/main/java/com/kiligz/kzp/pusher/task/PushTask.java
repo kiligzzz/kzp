@@ -3,7 +3,6 @@ package com.kiligz.kzp.pusher.task;
 import cn.hutool.extra.spring.SpringUtil;
 import com.kiligz.kzp.common.domain.Status;
 import com.kiligz.kzp.common.exception.KzpException;
-import com.kiligz.kzp.common.utils.ConcurrentManager;
 import com.kiligz.kzp.pusher.domain.AbstractMessage;
 import com.kiligz.kzp.pusher.channel.email.EmailChannel;
 

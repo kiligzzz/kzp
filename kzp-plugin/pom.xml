@@ -14,10 +14,13 @@
 
     <modules>
         <module>kzp-nacos</module>
+        <module>kzp-redis</module>
         <module>kzp-rpc</module>
+        <module>kzp-rocketmq</module>
         <module>kzp-satoken</module>
         <module>kzp-seata</module>
         <module>kzp-sentinel</module>
+        <module>kzp-trace</module>
     </modules>
 
     <dependencies>

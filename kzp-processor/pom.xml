@@ -29,11 +29,10 @@
             <artifactId>kzp-rpc</artifactId>
         </dependency>
 
-        <!-- rocketMq -->
+        <!-- kzp-rocketmq -->
         <dependency>
-            <groupId>org.apache.rocketmq</groupId>
-            <artifactId>rocketmq-spring-boot-starter</artifactId>
-            <version>2.2.2</version>
+            <groupId>com.kiligz</groupId>
+            <artifactId>kzp-rocketmq</artifactId>
         </dependency>
 
         <!-- kzp-satoken -->

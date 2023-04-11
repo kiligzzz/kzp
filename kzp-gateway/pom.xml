@@ -15,19 +15,13 @@
         <dependency>
             <groupId>com.kiligz</groupId>
             <artifactId>kzp-common</artifactId>
-        </dependency>
-
-        <!-- kzp-nacos -->
-        <dependency>
-            <groupId>com.kiligz</groupId>
-            <artifactId>kzp-nacos</artifactId>
-        </dependency>
-
-        <!-- kzp-rpc -->
-        <dependency>
-            <groupId>com.kiligz</groupId>
-            <artifactId>kzp-rpc</artifactId>
-            <version>0.0.1</version>
+            <exclusions>
+                <!-- 排除spring-boot-web -->
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-web</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!-- gateway -->
@@ -39,11 +33,11 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-loadbalancer</artifactId>
         </dependency>
-        <!-- 排除spring-boot-web -->
+
+        <!-- kzp-nacos -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-            <scope>test</scope>
+            <groupId>com.kiligz</groupId>
+            <artifactId>kzp-nacos</artifactId>
         </dependency>
 
         <!-- sa-token-reactor -->
@@ -51,7 +45,6 @@
             <groupId>cn.dev33</groupId>
             <artifactId>sa-token-reactor-spring-boot-starter</artifactId>
         </dependency>
-
         <!-- sa-token-redis -->
         <dependency>
             <groupId>cn.dev33</groupId>

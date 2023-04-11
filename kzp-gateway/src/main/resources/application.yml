@@ -15,12 +15,6 @@ spring:
             - Path=/kzp/auth/**
           filters:
             - StripPrefix=1
-        - id: kzp-biz
-          uri: lb://kzp-biz
-          predicates:
-            - Path=/kzp/biz/**
-          filters:
-            - StripPrefix=1
         - id: kzp-user
           uri: lb://kzp-user
           predicates:

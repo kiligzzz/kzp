@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
-import java.util.List;
 
 /**
  * 统一异常处理
@@ -25,20 +24,14 @@ import java.util.List;
  */
 @Slf4j
 @RestControllerAdvice
-public class GlobalExceptionHandler implements KzpExceptionHandler {
+public class GlobalExceptionHandler {
     /**
      * Kzp异常处理
      */
     @ExceptionHandler({KzpException.class})
     public RespVO<?> handleException(KzpException e) {
-        Status status = e.getStatus();
-        List<String> errorMsgList = e.getErrorMsgList();
-        if (errorMsgList.isEmpty()) {
-            log.error("KzpException: {}", status, e);
-        } else {
-            log.error("KzpException: {} {}", status, errorMsgList, e);
-        }
-        return RespVO.fail(status);
+        log.error("KzpException: ", e);
+        return RespVO.fail(e.getStatus());
     }
 
     /**

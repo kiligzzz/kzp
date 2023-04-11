@@ -13,7 +13,6 @@ public class Consts {
     public static final String KZP = "kzp";
 
     /*------------------------ 符号 ------------------------*/
-
     public static final String BLANK = " ";
     public static final String DOT = ".";
     public static final String COMMA = ",";
@@ -25,8 +24,11 @@ public class Consts {
     public static final String VERTICAL = "|";
     public static final String Hyphen = "-";
 
-    /*------------------------ 时间 ------------------------*/
+    /*---------------------- 文件说明 ----------------------*/
+    public static final String EXPLAIN_BEGIN = "<kzp#>";
+    public static final String EXPLAIN_END = "<#kzp>";
 
+    /*------------------------ 时间 ------------------------*/
     private static final Random RANDOM = new Random();
     public static final int ONE_HOUR = 60 * 60;
     public static final int ONE_DAY = 60 * 60 * 24;

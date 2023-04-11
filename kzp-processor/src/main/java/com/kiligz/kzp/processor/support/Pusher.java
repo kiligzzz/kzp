@@ -1,9 +1,7 @@
 package com.kiligz.kzp.processor.support;
 
 import lombok.RequiredArgsConstructor;
-import org.apache.rocketmq.client.producer.SendCallback;
-import org.apache.rocketmq.client.producer.SendResult;
-import org.apache.rocketmq.spring.core.RocketMQTemplate;
+import org.springframework.cloud.stream.annotation.StreamListener;
 
 /**
  * @author Ivan
@@ -12,17 +10,19 @@ import org.apache.rocketmq.spring.core.RocketMQTemplate;
 @RequiredArgsConstructor
 public class Pusher {
 
-    private final RocketMQTemplate rocketMQTemplate;
+//    private final RocketMQTemplate rocketMQTemplate;
 
+    @StreamListener
     public void send() {
         /*异步消息需要设置回调对象，消息发送成功/失败后，会由另外一个线程调用对象中的方法*/
-        rocketMQTemplate.asyncSend("s", "s", new SendCallback() {
-            @Override
-            public void onSuccess(SendResult sendResult) {
-            }
-            @Override
-            public void onException(Throwable throwable) {
-            }
-        },100000);
+//        rocketMQTemplate.asyncSend("s", "s", new SendCallback() {
+//            @Override
+//            public void onSuccess(SendResult sendResult) {
+//            }
+//            @Override
+//            public void onException(Throwable throwable) {
+//            }
+//        },100000);
+//        source.output().send(MessageBuilder.withPayload("sss").build());
     }
 }

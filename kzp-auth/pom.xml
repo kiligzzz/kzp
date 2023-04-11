@@ -29,6 +29,12 @@
             <artifactId>kzp-rpc</artifactId>
         </dependency>
 
+        <!-- kzp-trace -->
+        <dependency>
+            <groupId>com.kiligz</groupId>
+            <artifactId>kzp-trace</artifactId>
+        </dependency>
+
         <!-- kzp-satoken -->
         <dependency>
             <groupId>com.kiligz</groupId>

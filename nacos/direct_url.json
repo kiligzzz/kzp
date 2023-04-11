@@ -1,0 +1,8 @@
+[
+  "/favicon.ico",
+  "/kzp/auth/login",
+  "/kzp/auth/isLogin"
+]
+<kzp#>
+可直接访问的url配置，每个url一行
+<#kzp>

@@ -1,7 +1,7 @@
 package com.kiligz.kzp.auth;
 
 import cn.dev33.satoken.stp.StpUtil;
-import com.kiligz.kzp.auth.biz.AuthBiz;
+import com.kiligz.kzp.auth.service.AuthService;
 import com.kiligz.kzp.common.domain.Status;
 import com.kiligz.kzp.rpc.dto.user.UserDTO;
 import com.kiligz.kzp.common.enums.StatusEnum;
@@ -20,14 +20,14 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class AuthController {
 
-    private final AuthBiz authBiz;
+    private final AuthService authService;
 
     /**
      * 登录
      */
     @PostMapping("login")
     public RespVO<?> login(@RequestBody UserDTO userDTO) {
-        return authBiz.login(userDTO) ?
+        return authService.login(userDTO) ?
                 RespVO.success("登录成功") :
                 RespVO.fail(Status.auth(StatusEnum.USERNAME_OR_PASSWORD_ERROR));
     }

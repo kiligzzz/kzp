@@ -23,16 +23,6 @@
             <artifactId>kzp-nacos</artifactId>
         </dependency>
 
-        <!-- canal -->
-        <dependency>
-            <groupId>com.alibaba.otter</groupId>
-            <artifactId>canal.client</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba.otter</groupId>
-            <artifactId>canal.protocol</artifactId>
-        </dependency>
-
         <!-- xxl-job -->
         <dependency>
             <groupId>com.xuxueli</groupId>

@@ -18,7 +18,6 @@
 
     <modules>
         <module>kzp-gateway</module>
-        <module>kzp-biz</module>
         <module>kzp-processor</module>
         <module>kzp-pusher</module>
         <module>kzp-scheduler</module>
@@ -36,7 +35,7 @@
         <spring-boot.version>2.6.11</spring-boot.version>
         <spring-cloud.version>2021.0.4</spring-cloud.version>
         <spring-cloud-alibaba.version>2021.0.4.0</spring-cloud-alibaba.version>
-        <dubbo.version>3.1.0</dubbo.version>
+        <dubbo.version>3.1.1</dubbo.version>
         <seata.version>1.4.2</seata.version>
         <guava.version>31.1-jre</guava.version>
         <hutool.version>5.5.0</hutool.version>
@@ -47,6 +46,7 @@
         <reflect-asm.version>1.11.9</reflect-asm.version>
         <canal.version>1.1.6</canal.version>
         <xxl-job.version>2.3.1</xxl-job.version>
+        <ttl.version>2.14.2</ttl.version>
     </properties>
 
     <!-- 全局依赖 -->
@@ -94,11 +94,35 @@
                 <version>${project.version}</version>
             </dependency>
 
+            <!-- kzp-redis -->
+            <dependency>
+                <groupId>com.kiligz</groupId>
+                <artifactId>kzp-redis</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <!-- canal -->
+            <dependency>
+                <groupId>com.alibaba.otter</groupId>
+                <artifactId>canal.client</artifactId>
+                <version>${canal.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.otter</groupId>
+                <artifactId>canal.protocol</artifactId>
+                <version>${canal.version}</version>
+            </dependency>
+
             <!-- kzp-rpc -->
             <dependency>
                 <groupId>com.kiligz</groupId>
                 <artifactId>kzp-rpc</artifactId>
                 <version>${project.version}</version>
+            </dependency>
+            <!-- dubbo -->
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo-spring-boot-starter</artifactId>
+                <version>${dubbo.version}</version>
             </dependency>
 
             <!-- kzp-satoken -->
@@ -107,12 +131,36 @@
                 <artifactId>kzp-satoken</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <!-- sa-token -->
+            <dependency>
+                <groupId>cn.dev33</groupId>
+                <artifactId>sa-token-spring-boot-starter</artifactId>
+                <version>${sa-token.version}</version>
+            </dependency>
+            <!-- sa-token-redis -->
+            <dependency>
+                <groupId>cn.dev33</groupId>
+                <artifactId>sa-token-dao-redis-jackson</artifactId>
+                <version>${sa-token.version}</version>
+            </dependency>
+            <!-- sa-token-reactor -->
+            <dependency>
+                <groupId>cn.dev33</groupId>
+                <artifactId>sa-token-reactor-spring-boot-starter</artifactId>
+                <version>${sa-token.version}</version>
+            </dependency>
 
             <!-- kzp-seata -->
             <dependency>
                 <groupId>com.kiligz</groupId>
                 <artifactId>kzp-seata</artifactId>
                 <version>${project.version}</version>
+            </dependency>
+            <!-- seata -->
+            <dependency>
+                <groupId>io.seata</groupId>
+                <artifactId>seata-spring-boot-starter</artifactId>
+                <version>${seata.version}</version>
             </dependency>
 
             <!-- kzp-sentinel -->
@@ -122,64 +170,18 @@
                 <version>${project.version}</version>
             </dependency>
 
-            <!-- sa-token-reactor -->
+            <!-- kzp-rocketmq -->
             <dependency>
-                <groupId>cn.dev33</groupId>
-                <artifactId>sa-token-reactor-spring-boot-starter</artifactId>
-                <version>${sa-token.version}</version>
+                <groupId>com.kiligz</groupId>
+                <artifactId>kzp-rocketmq</artifactId>
+                <version>${project.version}</version>
             </dependency>
 
-            <!-- sa-token -->
+            <!-- kzp-trace -->
             <dependency>
-                <groupId>cn.dev33</groupId>
-                <artifactId>sa-token-spring-boot-starter</artifactId>
-                <version>${sa-token.version}</version>
-            </dependency>
-
-            <!-- sa-token-redis -->
-            <dependency>
-                <groupId>cn.dev33</groupId>
-                <artifactId>sa-token-dao-redis-jackson</artifactId>
-                <version>${sa-token.version}</version>
-            </dependency>
-
-            <!-- sentinel -->
-            <dependency>
-                <groupId>com.alibaba.cloud</groupId>
-                <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
-                <version>${spring-cloud-alibaba.version}</version>
-            </dependency>
-
-            <!-- rocketMq -->
-            <dependency>
-                <groupId>com.alibaba.cloud</groupId>
-                <artifactId>spring-cloud-starter-stream-rocketmq</artifactId>
-                <version>${spring-cloud-alibaba.version}</version>
-            </dependency>
-
-            <!-- seata -->
-            <dependency>
-                <groupId>com.alibaba.cloud</groupId>
-                <artifactId>spring-cloud-starter-alibaba-seata</artifactId>
-                <version>${spring-cloud-alibaba.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>io.seata</groupId>
-                        <artifactId>seata-spring-boot-starter</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>io.seata</groupId>
-                <artifactId>seata-spring-boot-starter</artifactId>
-                <version>${seata.version}</version>
-            </dependency>
-
-            <!-- dubbo -->
-            <dependency>
-                <groupId>org.apache.dubbo</groupId>
-                <artifactId>dubbo-spring-boot-starter</artifactId>
-                <version>${dubbo.version}</version>
+                <groupId>com.kiligz</groupId>
+                <artifactId>kzp-trace</artifactId>
+                <version>${project.version}</version>
             </dependency>
 
             <!-- spring-doc -->
@@ -207,18 +209,6 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid</artifactId>
                 <version>${druid.version}</version>
-            </dependency>
-
-            <!-- canal -->
-            <dependency>
-                <groupId>com.alibaba.otter</groupId>
-                <artifactId>canal.client</artifactId>
-                <version>${canal.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.alibaba.otter</groupId>
-                <artifactId>canal.protocol</artifactId>
-                <version>${canal.version}</version>
             </dependency>
 
             <!-- xxl-job -->

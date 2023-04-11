@@ -1,7 +1,7 @@
 package com.kiligz.kzp.processor;
 
 import com.kiligz.kzp.common.domain.PushWrapper;
-import com.kiligz.kzp.processor.biz.ProcessorBiz;
+import com.kiligz.kzp.processor.service.ProcessorService;
 import com.kiligz.kzp.processor.pattern.Pattern;
 import com.kiligz.kzp.processor.support.Validator;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class ProcessorController {
 
-    private final ProcessorBiz processorBiz;
+    private final ProcessorService processorService;
 
     @PostMapping("send")
     public void send(@RequestBody PushWrapper pw) throws InterruptedException {
@@ -27,6 +27,5 @@ public class ProcessorController {
         Validator.check(pw);
         Pattern.chooseAndQueue(pw);
 //        System.out.println(StpUtil.getLoginId());
-//        pw.getMsgWrapper().setUser(processorBiz.getUser((Integer) StpUtil.getLoginId()));
     }
 }

@@ -1,7 +1,7 @@
 package com.kiligz.kzp.user.service;
 
 import com.kiligz.kzp.common.utils.BeanUtil;
-import com.kiligz.kzp.common.utils.ConcurrentManager;
+import com.kiligz.kzp.common.utils.Concurrents;
 import com.kiligz.kzp.common.utils.SpringUtil;
 import com.kiligz.kzp.entity.user.Role;
 import com.kiligz.kzp.entity.user.User;
@@ -55,8 +55,7 @@ public class UserService implements RemoteUserService {
 
     @Override
     public Future<User> asyncGet(Integer id) {
-//        return ConcurrentUtil.submit(() -> get(id));
-        return ConcurrentManager.getFixedThreadPool("test").submit(() -> get(id));
+        return Concurrents.getFixedThreadPool("test").submit(() -> get(id));
     }
 
     /**
@@ -64,6 +63,7 @@ public class UserService implements RemoteUserService {
      */
     @Override
     public Integer verify(UserDTO userDTO) {
+        log.info("[user]" + userDTO.getAccount());
         User user = SpringUtil.getBean(UserService.class).selectUserByAccount(
                 userDTO.getAccount());
         if (user != null && BCryptUtil.check(userDTO, user)) {

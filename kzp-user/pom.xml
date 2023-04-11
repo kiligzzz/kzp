@@ -17,6 +17,13 @@
             <artifactId>kzp-common</artifactId>
         </dependency>
 
+        <!-- kzp-redis -->
+        <dependency>
+            <groupId>com.kiligz</groupId>
+            <artifactId>kzp-redis</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+
         <!-- kzp-nacos -->
         <dependency>
             <groupId>com.kiligz</groupId>
@@ -27,6 +34,12 @@
         <dependency>
             <groupId>com.kiligz</groupId>
             <artifactId>kzp-rpc</artifactId>
+        </dependency>
+
+        <!-- kzp-trace -->
+        <dependency>
+            <groupId>com.kiligz</groupId>
+            <artifactId>kzp-trace</artifactId>
         </dependency>
 
         <!-- mybatis-plus -->

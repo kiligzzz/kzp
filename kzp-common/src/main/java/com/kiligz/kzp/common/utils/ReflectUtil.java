@@ -32,7 +32,7 @@ public class ReflectUtil {
     }
 
     /**
-     * 获取方法访问器
+     * 获取属性访问器
      */
     public static FieldAccess getFieldAccess(Class<?> clazz) {
         return getAccess(fieldAccessMap, clazz, FieldAccess::get);

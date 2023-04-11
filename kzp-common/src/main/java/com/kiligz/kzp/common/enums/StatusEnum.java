@@ -14,6 +14,7 @@ import lombok.Getter;
  * 第三级：
  *      A：认证授权    B：业务错误    C：缓存错误
  *      D：数据库错误  F：文件IO错误  H：HTTP错误
+ *      M：中间件错误
  *      N：网络错误    R：RPC错误    S：系统错误
  *      Z：global<br/>
  * 第四级：
@@ -37,6 +38,8 @@ public enum StatusEnum {
     USERNAME_OR_PASSWORD_ERROR("A03", "用户名或密码错误"),
     NO_THIS_ROLE("A04", "不存在该角色"),
     NO_PERMISSION("A05", "无权限"),
+
+    NACOS_ERROR("M01", "连接或读取nacos配置文件错误"),
 
     UNKNOWN("Z99", "未知异常"),
     NO_PROVIDER("R01", "没有服务提供方"),

@@ -5,7 +5,6 @@ import com.esotericsoftware.reflectasm.MethodAccess;
 import com.kiligz.kzp.common.domain.Status;
 import com.kiligz.kzp.common.enums.StatusEnum;
 import com.kiligz.kzp.common.exception.KzpException;
-import org.springframework.util.StringUtils;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
@@ -35,13 +34,13 @@ public class BeanUtil {
         // 若没读取到属性值抛出异常
         if (fromFields.length == 0 || toNames.isEmpty()) {
             throw new KzpException(Status.global(StatusEnum.BEAN_COPY),
-                    from.getClass().getSimpleName(), to.getClass().getSimpleName());
+                    from.getClass().getSimpleName() + " -> " + to.getClass().getSimpleName());
         }
 
         for(Field field : fromFields) {
             String name = field.getName();
             if (toNames.contains(name)) {
-                String capitalize = StringUtils.capitalize(name);
+                String capitalize = StringUtil.capitalize(name);
                 String fromPrefix = field.getType() == Boolean.class ? "is" : "get";
 
                 Object value = fromMethodAccess.invoke(from, fromPrefix + capitalize);
